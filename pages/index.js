@@ -1,17 +1,19 @@
 import Head from "next/head";
 import styles from "@/styles/Home.module.css";
+import Link from "next/link";
 
 import Login from "../components/Login";
 import { useState, useEffect } from "react";
 import UseAxios from "@/useAxios";
-import GateDate from "@/components/GateData";
+import GateData from "@/components/GateData";
+import GateCode from "@/components/GateCode";
 
 function Home() {
   const [uname, setUsername] = useState("");
   const [pass, setPassword] = useState("");
   const [url, setUrl] = useState("");
   const [respones, error, loading] = UseAxios({ uname, pass, url });
-  const [ticket, setTicket] = useState("dara sabahi");
+  const [ticket, setTicket] = useState("");
 
   useEffect(() => {
     setTicket(respones.ticket);
@@ -28,9 +30,6 @@ function Home() {
     setPassword(value);
   };
 
-  const callGateDataApi = async () => {
-    setUrl("/gatData");
-  };
   return (
     <>
       <Head>
@@ -38,7 +37,13 @@ function Home() {
       </Head>
       <main className={`${styles.main} `}>
         {respones ? (
-          <GateDate ticket={ticket} />
+          <div>
+            <div>
+              <GateData ticket={ticket} />
+              <Link href={`./gateData/${ticket}`}>Gate Coode</Link>
+            </div>
+            <GateCode ticket={ticket} />
+          </div>
         ) : (
           <div>
             <Login

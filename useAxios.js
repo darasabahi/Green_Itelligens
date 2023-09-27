@@ -40,13 +40,36 @@ const UseAxios = (axiosParams) => {
         setError(error);
       });
   };
+  const gatCode = async () => {
+    const headers = {
+      headers: {
+        Authorization: `Bearer ${axiosParams.ticket}`,
+      },
+    };
+    const Content = {
+      message: "Write me a chrome extension code",
+    };
+    await instance
+      .post(axiosParams.url, Content, headers)
+      .then(function (response) {
+        setRespons(response.data.result);
+      })
+      .catch(function (error) {
+        console.log(error);
+        setError(error);
+      });
+  };
   useEffect(() => {
     switch (axiosParams.url) {
       case "/login":
         login();
-
+        break;
       case "/getData":
         gatData();
+        break;
+      case "/getCode":
+        gatCode();
+        break;
       default:
         break;
     }

@@ -2,7 +2,7 @@ import { useState } from "react";
 import SanitizeHtml from "../components/sanitizeHtml";
 import UseAxios from "@/useAxios";
 
-const GateDate = ({ ticket }) => {
+const GateData = ({ ticket }) => {
   const [url, setUrl] = useState("");
   const [respones, error, loading] = UseAxios({ url, ticket });
   const [gateData, setGetData] = useState(false);
@@ -24,4 +24,4 @@ const GateDate = ({ ticket }) => {
     </>
   );
 };
-export default GateDate;
+export default GateData;
