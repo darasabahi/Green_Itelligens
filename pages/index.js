@@ -40,7 +40,7 @@ function Home() {
           <div>
             <div>
               {/* <GateData ticket={ticket} /> */}
-              <Link href={`./gateData/${ticket}`}>Gate Coode</Link>
+              <Link href={`./gateData/${ticket}`}>Gate Data</Link>
             </div>
             <GateCode ticket={ticket} />
           </div>
@@ -52,8 +52,8 @@ function Home() {
               setUname={setUname}
               setPass={setPass}
               login={login}
+              error={error}
             ></Login>
-            <div>{error && <label>{error?.response?.data.message}</label>}</div>
           </div>
         )}
       </main>
