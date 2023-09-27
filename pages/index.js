@@ -39,7 +39,7 @@ function Home() {
         {respones ? (
           <div>
             <div>
-              <GateData ticket={ticket} />
+              {/* <GateData ticket={ticket} /> */}
               <Link href={`./gateData/${ticket}`}>Gate Coode</Link>
             </div>
             <GateCode ticket={ticket} />

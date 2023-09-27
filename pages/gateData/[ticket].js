@@ -4,10 +4,9 @@ import UseAxios from "@/useAxios";
 import axios from "axios";
 
 const GateData = (props) => {
-  console.log(props);
   return (
     <>
-      <SanitizeHtml text={props.respones}></SanitizeHtml>
+      <SanitizeHtml text={props.response}></SanitizeHtml>
     </>
   );
 };
@@ -16,9 +15,9 @@ export default GateData;
 export const getServerSideProps = async (context) => {
   const { params } = context;
   const ticket = params.ticket;
-  const url = "/gateData";
-  let response = "";
-  let error = "";
+  const url = "/getData";
+  let Response = "";
+  let Error = "";
   const instance = axios.create({
     baseURL: "http://shserver.top:8080/test/users",
   });
@@ -27,16 +26,17 @@ export const getServerSideProps = async (context) => {
       Authorization: `Bearer ${ticket}`,
     },
   };
+
   await instance
     .get(url, headers)
     .then(function (response) {
-      response = response.data.result;
+      Response = response.data.result;
     })
     .catch(function (error) {
-      error = error;
+      Error = error;
     });
 
   return {
-    props: { response: response, error: error },
+    props: { response: Response },
   };
 };
