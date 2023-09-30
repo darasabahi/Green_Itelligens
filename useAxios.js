@@ -1,4 +1,5 @@
 import axios from "axios";
+import EventSource from "eventsource";
 import { useEffect, useState } from "react";
 
 const instance = axios.create({
@@ -25,50 +26,11 @@ const UseAxios = (axiosParams) => {
       });
   };
 
-  const gatData = async () => {
-    const headers = {
-      headers: {
-        Authorization: `Bearer ${axiosParams.ticket}`,
-      },
-    };
-    await instance
-      .get(axiosParams.url, headers)
-      .then(function (response) {
-        setRespons(response.data.result);
-      })
-      .catch(function (error) {
-        setError(error);
-      });
-  };
-  const gatCode = async () => {
-    const headers = {
-      headers: {
-        Authorization: `Bearer ${axiosParams.ticket}`,
-      },
-    };
-    const Content = {
-      message: "Write me a chrome extension code",
-    };
-    await instance
-      .post(axiosParams.url, Content, headers)
-      .then(function (response) {
-        setRespons(response.data.result);
-      })
-      .catch(function (error) {
-        console.log(error);
-        setError(error);
-      });
-  };
+
   useEffect(() => {
     switch (axiosParams.url) {
       case "/login":
         login();
-        break;
-      case "/getData":
-        gatData();
-        break;
-      case "/getCode":
-        gatCode();
         break;
       default:
         break;

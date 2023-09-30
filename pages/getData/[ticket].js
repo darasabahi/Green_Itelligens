@@ -1,13 +1,14 @@
-import { useState } from "react";
 import SanitizeHtml from "../../components/sanitizeHtml";
-import UseAxios from "@/useAxios";
 import axios from "axios";
+import GetDataStyle from "@/styles/GetData.module.css";
 
 const GateData = (props) => {
   return (
-    <>
-      <SanitizeHtml text={props.response}></SanitizeHtml>
-    </>
+    <div className={`${GetDataStyle.main}`}>
+      <div className={`${GetDataStyle.card}`}>
+        <SanitizeHtml text={props.response}></SanitizeHtml>
+      </div>
+    </div>
   );
 };
 export default GateData;

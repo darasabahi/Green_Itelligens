@@ -5,8 +5,6 @@ import Link from "next/link";
 import Login from "../components/Login";
 import { useState, useEffect } from "react";
 import UseAxios from "@/useAxios";
-import GateData from "@/components/GateData";
-import GateCode from "@/components/GateCode";
 
 function Home() {
   const [uname, setUsername] = useState("");
@@ -14,6 +12,7 @@ function Home() {
   const [url, setUrl] = useState("");
   const [respones, error, loading] = UseAxios({ uname, pass, url });
   const [ticket, setTicket] = useState("");
+  const [getDataButton, setGetDataButton] = useState("Get Data");
 
   useEffect(() => {
     setTicket(respones.ticket);
@@ -38,11 +37,20 @@ function Home() {
       <main className={`${styles.main} `}>
         {respones ? (
           <div>
-            <div>
-              {/* <GateData ticket={ticket} /> */}
-              <Link href={`./gateData/${ticket}`}>Gate Data</Link>
+            <div
+              className={`${styles.card} `}
+              onClick={() => setGetDataButton("Please Wait!")}
+            >
+              <Link href={`./getData/[ticket]`} as={`./getData/${ticket}`}>
+                {getDataButton}
+              </Link>
             </div>
-            <GateCode ticket={ticket} />
+
+            <div className={`${styles.card} `}>
+              <Link href={`/getCode/${ticket}`} as={`/getCode/${ticket}`}>
+                Get Code
+              </Link>
+            </div>
           </div>
         ) : (
           <div>
